@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class HomePage extends StatefulWidget {
@@ -55,11 +56,14 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text(
                             "Halo, Melvin!",
-                            style: TextStyle(
+                            style: GoogleFonts.sourceSans3(
+                              textStyle: TextStyle(
                                 fontSize: 22.sp,
                                 fontWeight: FontWeight.bold,
                                 decoration: TextDecoration.none,
-                                color: HexColor("#FFFFFF")),
+                                color: HexColor("#FFFFFF"),
+                              ),
+                            ),
                           ),
                           Container(
                             width: 50.w,
@@ -73,6 +77,7 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(
                         height: 12.h,
                       ),
+                      // Search Bar
                       Container(
                         width: 350.w,
                         height: 52.h,
@@ -82,6 +87,14 @@ class _HomePageState extends State<HomePage> {
                           border: Border.all(
                             color: HexColor("#D9D9D9"),
                           ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: HexColor("#000000").withOpacity(0.25),
+                              spreadRadius: 0,
+                              blurRadius: 4,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -138,9 +151,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          SizedBox(
-            height: 30.h,
-          ),
           // ----------- Antrianmu (Scrollable) -------------
           Expanded(
             child: SingleChildScrollView(
@@ -149,14 +159,17 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left: 24.w),
+                        padding: EdgeInsets.only(left: 24.w, top: 30.h),
                         child: Text(
                           "Antrianmu",
-                          style: TextStyle(
+                          style: GoogleFonts.sourceSans3(
+                            textStyle: TextStyle(
                               fontSize: 20.sp,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w700,
                               decoration: TextDecoration.none,
-                              color: HexColor("#000000")),
+                              color: HexColor("#000000"),
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -352,11 +365,14 @@ class _HomePageState extends State<HomePage> {
                         padding: EdgeInsets.only(left: 24.w),
                         child: Text(
                           "Kategori",
-                          style: TextStyle(
+                          style: GoogleFonts.sourceSans3(
+                            textStyle: TextStyle(
                               fontSize: 20.sp,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w700,
                               decoration: TextDecoration.none,
-                              color: HexColor("#000000")),
+                              color: HexColor("#000000"),
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -365,7 +381,8 @@ class _HomePageState extends State<HomePage> {
                     height: 20.h,
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 22.w, right: 22.w),
+                    padding:
+                        EdgeInsets.only(left: 22.w, right: 22.w, bottom: 34.h),
                     child: Column(
                       children: [
                         Row(
@@ -393,11 +410,14 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 Text(
                                   "Bank",
-                                  style: TextStyle(
+                                  style: GoogleFonts.sourceSans3(
+                                    textStyle: TextStyle(
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.normal,
                                       decoration: TextDecoration.none,
-                                      color: HexColor("#000000")),
+                                      color: HexColor("#000000"),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -423,11 +443,14 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 Text(
                                   "Kesehatan",
-                                  style: TextStyle(
+                                  style: GoogleFonts.sourceSans3(
+                                    textStyle: TextStyle(
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.normal,
                                       decoration: TextDecoration.none,
-                                      color: HexColor("#000000")),
+                                      color: HexColor("#000000"),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -453,11 +476,14 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 Text(
                                   "Restoran",
-                                  style: TextStyle(
+                                  style: GoogleFonts.sourceSans3(
+                                    textStyle: TextStyle(
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.normal,
                                       decoration: TextDecoration.none,
-                                      color: HexColor("#000000")),
+                                      color: HexColor("#000000"),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -494,11 +520,14 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 Text(
                                   "Hiburan",
-                                  style: TextStyle(
+                                  style: GoogleFonts.sourceSans3(
+                                    textStyle: TextStyle(
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.normal,
                                       decoration: TextDecoration.none,
-                                      color: HexColor("#000000")),
+                                      color: HexColor("#000000"),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -524,11 +553,14 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 Text(
                                   "Service",
-                                  style: TextStyle(
+                                  style: GoogleFonts.sourceSans3(
+                                    textStyle: TextStyle(
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.normal,
                                       decoration: TextDecoration.none,
-                                      color: HexColor("#000000")),
+                                      color: HexColor("#000000"),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -554,11 +586,14 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 Text(
                                   "Lainnya",
-                                  style: TextStyle(
+                                  style: GoogleFonts.sourceSans3(
+                                    textStyle: TextStyle(
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.normal,
                                       decoration: TextDecoration.none,
-                                      color: HexColor("#000000")),
+                                      color: HexColor("#000000"),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -571,16 +606,13 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          SizedBox(
-            height: 34.h,
-          ),
           Container(
             height: 65.h,
             width: 390.w,
             decoration: BoxDecoration(
               border: Border(
                 top: BorderSide(
-                  color: HexColor("#E7E7E7"),
+                  color: HexColor("#633DCF").withOpacity(0.18),
                   width: 3.r,
                 ),
               ),

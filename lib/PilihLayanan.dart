@@ -103,7 +103,7 @@ class _PilihLayananState extends State<PilihLayanan> {
                         ),
                       ),
                       Text(
-                        "Dayeuhkolot",
+                        "Dayeuhkolot Bandung",
                         style: GoogleFonts.sourceSans3(
                           textStyle: TextStyle(
                             fontSize: 27.sp,

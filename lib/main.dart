@@ -20,9 +20,9 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: '/welcomePage',
+            initialRoute: '/',
             getPages: [
-              GetPage(name: '/welcomePage', page: () => const WelcomePage()),
+              GetPage(name: '/', page: () => const WelcomePage()),
             ],
             theme: ThemeData(textTheme: GoogleFonts.interTextTheme()),
           );

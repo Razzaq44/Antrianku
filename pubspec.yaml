@@ -75,6 +75,16 @@ flutter:
     - assets/Home.png
     - assets/Ticket.png
     - assets/Profile.png
+    - assets/RegisterPage.png
+    - assets/Mandiri.png
+    - assets/Back.png
+    - assets/Jam.png
+    - assets/Telp.png
+    - assets/Star.png
+    - assets/Person.png
+    - assets/Location.png
+    - assets/Quality.png
+    - assets/Refresh.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import 'package:antrianku/homePage.dart';
+import 'package:antrianku/loginPage.dart';
 import 'package:antrianku/registerPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -113,7 +113,7 @@ class WelcomePageState extends State<WelcomePage> {
                                   width: 125.w,
                                   height: 53.h,
                                   child: ElevatedButton(
-                                    onPressed: () => Get.to(const HomePage()),
+                                    onPressed: () => Get.to(const LoginPage()),
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: HexColor("#633DCF"),
                                         shape: RoundedRectangleBorder(

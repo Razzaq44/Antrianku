@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import 'package:antrianku/PilihLayanan.dart';
+import 'package:antrianku/bankPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -398,7 +398,7 @@ class _HomePageState extends State<HomePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               InkWell(
-                                onTap: () {},
+                                onTap: () => Get.to(const BankPage()),
                                 child: Column(
                                   children: [
                                     Container(
@@ -435,7 +435,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               InkWell(
-                                onTap: () => Get.to(const PilihLayanan()),
+                                onTap: () {},
                                 child: Column(
                                   children: [
                                     Container(
@@ -662,7 +662,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: () => Get.to(const HomePage()),
                       child: Container(
                         height: 30.h,
                         width: 30.w,

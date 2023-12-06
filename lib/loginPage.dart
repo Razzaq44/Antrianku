@@ -132,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                                             side: BorderSide(
                                                 color: HexColor("#FFFFFF"))),
                                         child: Text(
-                                          "Buat Akun",
+                                          "Masuk",
                                           style: TextStyle(
                                               color: HexColor("#FFFFFF"),
                                               fontSize: 16.sp,

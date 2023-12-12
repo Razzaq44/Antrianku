@@ -1,20 +1,23 @@
-// ignore_for_file: file_names
-
-import 'package:antrianku/bankPage.dart';
+import 'package:antrianku/pengantri/bankPage.dart';
+import 'package:antrianku/pengantri/homePage.dart';
+import 'package:antrianku/welcomePage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomePageMitra extends StatefulWidget {
+  const HomePageMitra({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePageMitra> createState() => _HomePageMitraState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageMitraState extends State<HomePageMitra> {
+  @override
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Halo, Melvin!",
+                              "Halo, Mitra!",
                               style: GoogleFonts.sourceSans3(
                                 textStyle: TextStyle(
                                   fontSize: 22.sp,
@@ -68,12 +71,17 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                            Container(
-                              width: 50.w,
-                              height: 50.h,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage("assets/PP.png"))),
+                            InkWell(
+                              onTap: () {
+                                signOut();
+                              },
+                              child: Container(
+                                width: 50.w,
+                                height: 50.h,
+                                decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage("assets/PP.png"))),
+                              ),
                             ),
                           ],
                         ),
@@ -708,5 +716,26 @@ class _HomePageState extends State<HomePage> {
         ),
       )),
     );
+  }
+
+  void signOut() async {
+    try {
+      await _auth.signOut();
+      Get.offAll(const WelcomePage());
+    } on FirebaseAuthException catch (e) {
+      Get.snackbar(
+        "Error",
+        e.code,
+        icon: const Icon(Icons.dangerous_outlined),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
+    }
   }
 }

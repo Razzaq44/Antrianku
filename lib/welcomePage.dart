@@ -113,7 +113,9 @@ class WelcomePageState extends State<WelcomePage> {
                                   width: 125.w,
                                   height: 53.h,
                                   child: ElevatedButton(
-                                    onPressed: () => Get.to(const LoginPage()),
+                                    onPressed: () {
+                                      Get.to(() => const LoginPage());
+                                    },
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: HexColor("#633DCF"),
                                         shape: RoundedRectangleBorder(
@@ -135,8 +137,9 @@ class WelcomePageState extends State<WelcomePage> {
                                   width: 125.w,
                                   height: 53.h,
                                   child: ElevatedButton(
-                                    onPressed: () =>
-                                        Get.to(const RegisterPage()),
+                                    onPressed: () {
+                                      Get.to(() => const RegisterPage());
+                                    },
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: HexColor("#FFFFFF"),
                                         shape: RoundedRectangleBorder(

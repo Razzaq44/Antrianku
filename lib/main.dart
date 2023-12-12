@@ -1,16 +1,36 @@
+import 'package:antrianku/pengantri/homePage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'WelcomePage.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final User? user = auth.currentUser;
+
+  Widget? homePage;
+
+  if (user != null) {
+    homePage = const HomePage();
+  } else {
+    homePage = const WelcomePage();
+  }
+  runApp(MyApp(homePage: homePage));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Widget homePage;
+
+  const MyApp({super.key, required this.homePage});
 
   // This widget is the root of your application.
   @override
@@ -19,6 +39,7 @@ class MyApp extends StatelessWidget {
         designSize: const Size(390, 844),
         builder: (context, child) {
           return GetMaterialApp(
+            home: homePage,
             debugShowCheckedModeBanner: false,
             initialRoute: '/',
             getPages: [

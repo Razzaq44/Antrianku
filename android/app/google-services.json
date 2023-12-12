@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1017794814607",
+    "project_id": "antrianku-6c8c5",
+    "storage_bucket": "antrianku-6c8c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017794814607:android:e5bbe8730c46f38d6106fa",
+        "android_client_info": {
+          "package_name": "com.example.antrianku"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNeGk-XbuTxJsBwqTxuKVwY_PfyEYm8is"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

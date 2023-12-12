@@ -1,5 +1,5 @@
-import 'package:antrianku/homePage.dart';
-import 'package:antrianku/lihatLayanan.dart';
+import 'package:antrianku/pengantri/homePage.dart';
+import 'package:antrianku/pengantri/lihatLayanan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

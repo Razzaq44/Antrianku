@@ -1,5 +1,5 @@
-import 'package:antrianku/pengantri/bankPage.dart';
 import 'package:antrianku/pengantri/homePage.dart';
+import 'package:antrianku/pengantri/kategoriPage.dart';
 import 'package:antrianku/welcomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -406,7 +406,7 @@ class _HomePageMitraState extends State<HomePageMitra> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               InkWell(
-                                onTap: () => Get.to(const BankPage()),
+                                onTap: () => Get.to(const KategoriPage()),
                                 child: Column(
                                   children: [
                                     Container(

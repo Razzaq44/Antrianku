@@ -8,12 +8,15 @@ import 'package:get/get.dart';
 
 class Database extends GetxController {
   String? name;
+  String? namaMitra;
   String? role;
   var menu = [];
   var infoMitra = [];
   var listLayanan = [];
   var detailLayanan = [];
   var infoAntri = [];
+  var listAntrianMitra = [];
+  var listAntrianMitraAccepted = [];
   final _auth = FirebaseAuth.instance;
 
   Future<void> getUsn() async {
@@ -24,6 +27,15 @@ class Database extends GetxController {
         .get();
     name = userDoc.get('username');
     role = userDoc.get('role');
+  }
+
+  Future<void> getUsnMitra() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    final DocumentSnapshot userDoc = await FirebaseFirestore.instance
+        .collection('akun')
+        .doc(user?.uid)
+        .get();
+    namaMitra = userDoc.get('namaMitra');
   }
 
   Future<void> getListMitra(String category) async {
@@ -195,6 +207,23 @@ class Database extends GetxController {
         'kategori': kategori,
         'proses': proses,
       });
+      await FirebaseFirestore.instance
+          .collection('antrian')
+          .doc('$namaBank-$loket$jumlahDaftar')
+          .set({
+        'loket': loket,
+        'namaMitra': namaBank,
+        'namaPengantri': namaPengantri,
+        'sisaAntrian': sisaAntrian,
+        'catatan': catatan,
+        'nomorAntrian': "$loket$jumlahDaftar",
+        'namaLayanan': namaLayanan,
+        'alamatMitra': alamat,
+        'kategori': kategori,
+        'proses': proses,
+        'uID': user?.uid,
+        'status': "",
+      });
       return Get.to(() => const DapatNomor());
     }
   }
@@ -258,6 +287,16 @@ class Database extends GetxController {
         isDismissible: true,
         forwardAnimationCurve: Curves.easeOutBack,
       );
+      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+          .collection('akun')
+          .doc(user?.uid)
+          .get();
+      String namaBank = documentSnapshot.get('namaMitra');
+      String nomorAntrian = documentSnapshot.get('nomorAntrian');
+      await FirebaseFirestore.instance
+          .collection('antrian')
+          .doc('$namaBank-$nomorAntrian')
+          .delete();
       await FirebaseFirestore.instance
           .collection('akun')
           .doc(user?.uid)
@@ -308,6 +347,168 @@ class Database extends GetxController {
         isDismissible: true,
         forwardAnimationCurve: Curves.easeOutBack,
       );
+    }
+  }
+
+  Stream<void> getListAntrianMitra(namaMitra) {
+    return FirebaseFirestore.instance
+        .collection('antrian')
+        .where('namaMitra', isEqualTo: namaMitra)
+        .where('status', isNotEqualTo: 'accept')
+        .snapshots()
+        .map((QuerySnapshot querySnapshot) {
+      List<Map<String, dynamic>> newDataList = [];
+      for (var doc in querySnapshot.docs) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        newDataList.add({
+          'namaPengantri': data['namaPengantri'],
+          'namaMitra': data['namaMitra'],
+          'nomorAntrian': data['nomorAntrian'],
+          'loket': data['loket'],
+        });
+      }
+      listAntrianMitra = newDataList;
+    });
+  }
+
+  Stream<void> getListAntrianMitraAccepted(namaMitra) {
+    return FirebaseFirestore.instance
+        .collection('antrian')
+        .where('namaMitra', isEqualTo: namaMitra)
+        .where('status', isEqualTo: "accept")
+        .snapshots()
+        .map((QuerySnapshot querySnapshot) {
+      List<Map<String, dynamic>> newDataList = [];
+      for (var doc in querySnapshot.docs) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        newDataList.add({
+          'namaPengantri': data['namaPengantri'],
+          'nomorAntrian': data['nomorAntrian'],
+          'namaMitra': data['namaMitra'],
+          'loket': data['loket'],
+        });
+      }
+      listAntrianMitraAccepted = newDataList;
+    });
+  }
+
+  accept(String namaMitra, String nomorAntrian) {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    CollectionReference ref = db.collection('antrian');
+    ref.doc("$namaMitra-$nomorAntrian").update({'status': "accept"});
+  }
+
+  queueDone(String namaMitra, String nomorAntrian) async {
+    DocumentSnapshot uid = await FirebaseFirestore.instance
+        .collection('antrian')
+        .doc('$namaMitra-$nomorAntrian')
+        .get();
+    String id = uid.get('uID');
+    bool confirm = await Get.defaultDialog(
+      title: 'Confirmation',
+      middleText: 'Apakah anda yakin telah selesai?',
+      actions: [
+        ElevatedButton(
+          onPressed: () {
+            Get.back(result: true);
+          },
+          child: const Text('Yes'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Get.back(result: false);
+          },
+          child: const Text('No'),
+        ),
+      ],
+    );
+    if (confirm) {
+      Get.snackbar(
+        "Successful",
+        "Terimakasih Telah Menggunakan Antrianku",
+        icon: const Icon(Icons.dangerous_outlined),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.green,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
+      await FirebaseFirestore.instance.collection('akun').doc(id).update({
+        'loket': "",
+        'namaMitra': "",
+        'namaPengantri': "",
+        'sisaAntrian': 0,
+        'catatan': "",
+        'nomorAntrian': "",
+        'namaLayanan': "",
+        'alamatMitra': "",
+        'kategori': "",
+        'proses': "",
+      });
+      await FirebaseFirestore.instance
+          .collection('antrian')
+          .doc('$namaMitra-$nomorAntrian')
+          .delete();
+    }
+  }
+
+  decline(String namaMitra, String nomorAntrian) async {
+    bool confirm = await Get.defaultDialog(
+      title: 'Confirmation',
+      middleText: 'Apakah anda yakin membatalkan antrian ini?',
+      actions: [
+        ElevatedButton(
+          onPressed: () {
+            Get.back(result: true);
+          },
+          child: const Text('Yes'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Get.back(result: false);
+          },
+          child: const Text('No'),
+        ),
+      ],
+    );
+    DocumentSnapshot uid = await FirebaseFirestore.instance
+        .collection('antrian')
+        .doc('$namaMitra-$nomorAntrian')
+        .get();
+    String id = uid.get('uID');
+    if (confirm) {
+      Get.snackbar(
+        "Successful",
+        "Anda telah berhasil mebatalkan antrian ini",
+        icon: const Icon(Icons.dangerous_outlined),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.yellow,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
+      await FirebaseFirestore.instance.collection('akun').doc(id).update({
+        'loket': "",
+        'namaMitra': "",
+        'namaPengantri': "",
+        'sisaAntrian': 0,
+        'catatan': "",
+        'nomorAntrian': "",
+        'namaLayanan': "",
+        'alamatMitra': "",
+        'kategori': "",
+        'proses': "",
+      });
+      await FirebaseFirestore.instance
+          .collection('antrian')
+          .doc('$namaMitra-$nomorAntrian')
+          .delete();
     }
   }
 }

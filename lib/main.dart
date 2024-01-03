@@ -1,3 +1,5 @@
+import 'package:antrianku/DBController/controller.dart';
+import 'package:antrianku/mitra/homePageMitra.dart';
 import 'package:antrianku/pengantri/homePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,11 +18,17 @@ Future<void> main() async {
   );
   final FirebaseAuth auth = FirebaseAuth.instance;
   final User? user = auth.currentUser;
+  final Database db = Database();
 
   Widget? homePage;
 
   if (user != null) {
-    homePage = const HomePage();
+    db.getUsn();
+    if (db.role != "mitra") {
+      homePage = const HomePage();
+    } else {
+      homePage = const HomePageMitra();
+    }
   } else {
     homePage = const WelcomePage();
   }

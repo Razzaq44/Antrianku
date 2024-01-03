@@ -288,9 +288,21 @@ class _RegisterPageState extends State<RegisterPage> {
     FirebaseFirestore db = FirebaseFirestore.instance;
     var user = _auth.currentUser;
     CollectionReference ref = db.collection('akun');
-    ref
-        .doc(user!.uid)
-        .set({'email': email, 'role': role, 'username': userName});
+    ref.doc(user!.uid).set({
+      'email': email,
+      'role': role,
+      'username': userName,
+      'loket': "",
+      'namaMitra': "",
+      'namaPengantri': "",
+      'sisaAntrian': 0,
+      'catatan': "",
+      'nomorAntrian': "",
+      'namaLayanan': "",
+      'alamatMitra': "",
+      'kategori': "",
+      'proses': "",
+    });
   }
 
   signIn(String email, String password) async {

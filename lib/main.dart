@@ -18,16 +18,16 @@ Future<void> main() async {
   );
   final FirebaseAuth auth = FirebaseAuth.instance;
   final User? user = auth.currentUser;
-  final Database db = Database();
+  final Database database = Get.put(Database());
 
   Widget? homePage;
 
+  database.getUsn();
   if (user != null) {
-    db.getUsn();
-    if (db.role != "mitra") {
-      homePage = const HomePage();
-    } else {
+    if (database.role != 'mitra') {
       homePage = const HomePageMitra();
+    } else {
+      homePage = const HomePage();
     }
   } else {
     homePage = const WelcomePage();

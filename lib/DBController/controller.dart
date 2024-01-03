@@ -350,7 +350,7 @@ class Database extends GetxController {
     }
   }
 
-  Stream<void> getListAntrianMitra(namaMitra) {
+  Stream<List<Map<String, dynamic>>> getListAntrianMitra(namaMitra) {
     return FirebaseFirestore.instance
         .collection('antrian')
         .where('namaMitra', isEqualTo: namaMitra)
@@ -367,11 +367,11 @@ class Database extends GetxController {
           'loket': data['loket'],
         });
       }
-      listAntrianMitra = newDataList;
+      return listAntrianMitra = newDataList;
     });
   }
 
-  Stream<void> getListAntrianMitraAccepted(namaMitra) {
+  Stream<List<Map<String, dynamic>>> getListAntrianMitraAccepted(namaMitra) {
     return FirebaseFirestore.instance
         .collection('antrian')
         .where('namaMitra', isEqualTo: namaMitra)
@@ -388,7 +388,7 @@ class Database extends GetxController {
           'loket': data['loket'],
         });
       }
-      listAntrianMitraAccepted = newDataList;
+      return listAntrianMitraAccepted = newDataList;
     });
   }
 
